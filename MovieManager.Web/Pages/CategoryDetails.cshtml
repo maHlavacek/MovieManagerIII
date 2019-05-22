@@ -1,0 +1,47 @@
+﻿@page
+@model MovieManager.Web.Pages.CategoryDetailsModel
+@{
+    ViewData["Title"] = "CategoryDetails";
+}
+
+<h1>CategoryDetails</h1>
+
+<h2>@ViewData["Message"]</h2>
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.MovieItems[0].Title)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.MovieItems[0].Duration)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.MovieItems[0].Year)
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.MovieItems)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(_ => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.Year)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</form>
+<form method="get">
+    <button type ="Submit" class="btn btn-primary"
+            asp-page="./OverView"> Back to OverView
+    </button>
+</form>

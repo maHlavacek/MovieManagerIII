@@ -1,0 +1,27 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using MovieManager.Core.Entities;
+using System;
+using System.Diagnostics;
+
+namespace MovieManager.Persistence
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Environment.CurrentDirectory)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            var configuration = builder.Build();
+            Debug.Write(configuration.ToString());
+            string connectionString = configuration["ConnectionStrings:DefaultConnection"];
+            optionsBuilder.UseSqlServer(connectionString);
+
+        }
+    }
+}

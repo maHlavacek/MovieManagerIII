@@ -1,0 +1,49 @@
+﻿@page
+@model MovieManager.Web.Pages.OverViewModel
+@{
+    ViewData["Title"] = "OverView";
+}
+
+<h1>OverView</h1>
+
+<h2>@ViewData["Message"]</h2>
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryItems[0].CategoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryItems[0].Count)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryItems[0].AVGDuration)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CategoryItems)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(_ => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.AVGDuration)
+                </td>
+                <td>
+                    <button type="Submit"
+                            class="btn btn-primary"
+                            asp-page-handler="CategorySelected"
+                            asp-route-categoryId="@item.Id">Select
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</form>
